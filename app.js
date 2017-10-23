@@ -3,7 +3,7 @@ var app = express();
 var serv = require ('http').Server(app);
 
 
-app.get('/',function(req, res) {			
+app.get('/',function(req, res) {
 	res.sendFile(__dirname + '/client/index.html');
 });
 app.use('/client',express.static(__dirname + '/client'));
@@ -23,41 +23,40 @@ io.sockets.on('connection', function(socket){
 
 	socket.number = "" + Math.floor(10*Math.random());
 	SOCKET_LIST[socket.id] = socket;
-	
+
 	socket.on('disconnect',function(){
 		delete 	SOCKET_LIST[socket.id]
 	});
-		
+
 });
 
 
-setInterval(function(){		
-	var pack = []; 
+setInterval(function(){
+	var pack = [];
 	for(var i  in SOCKET_LIST){
 			var socket=SOCKET_LIST[i];
-			
+
 			// if(Math.random()*10>9)socket.x-=2;
 			 socket.x++;
-			
+
 			 socket.y++;
 			pack.push({
 				x:socket.x,
 				y:socket.y,
-		
+
 				number:socket.number
 			});
 		}
-		
+
 		for(var i  in SOCKET_LIST){
 			var socket=SOCKET_LIST[i];
 			socket.emit('newPositions',pack);
-							
+
 		}
-			
+
 },1000/25);
 
 
 
 
-
-
+sadasdasdasdsasdas
