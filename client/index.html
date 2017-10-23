@@ -1,0 +1,36 @@
+
+<canvas id="ctx" width="500" height="500" style="border:1px
+ solid #000000;"></canvas>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var ctx = document.getElementById("ctx").getContext("2d");
+	ctx.font = '30px Arial';
+	
+	
+var radius = 20;
+	var socket = io();
+					
+	socket.on('newPositions' , function(data){
+		
+		ctx.clearRect(0,0,500,500);
+		for(var i = 0 ; i < data.length; i++){
+		  
+			 ctx.beginPath();
+				ctx.arc(data[i].x+10, data[i].y-10, radius, 0, 2 * Math.PI, false);
+				ctx.fillStyle = 'green';
+				ctx.fill();
+				 ctx.lineWidth = 5;
+				ctx.strokeStyle = '#003300';
+					ctx.stroke();
+					ctx.fillStyle = 'black';
+					ctx.fillText(data[i].number,data[i].x,data[i].y);
+			}
+		
+		});
+
+	
+		
+</script>
+	
+	weqweqwehuiqwgejqwegqwhjegqgeqwgeqweqwejwggqjhwgqehjq
